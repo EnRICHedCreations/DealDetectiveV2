@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(180deg, #1a1a2e 0%, #0f3460 100%);
+  color: #f5f5f5;
+  min-height: 100vh;
+  image-rendering: pixelated;
+}
+
+.App {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 13px;
+}
+
+.pirate-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 13px;
+  background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+  border: 3px solid #d4a574;
+  border-radius: 5px;
+  box-shadow: 0 5px 0 #654321, 0 8px 13px rgba(0, 0, 0, 0.5);
+}
+
+.pirate-header h1 {
+  font-size: 1.34rem;
+  color: #ffd700;
+  text-shadow: 2px 2px 0 #654321, 3px 3px 0 #000;
+  margin-bottom: 7px;
+  letter-spacing: 1.3px;
+}
+
+.subtitle {
+  font-size: 0.47rem;
+  color: #f5deb3;
+  margin-top: 7px;
+  text-shadow: 1px 1px 0 #654321;
+}
+
+.progress {
+  font-size: 0.54rem;
+  color: #ffd700;
+  margin-top: 10px;
+  padding: 7px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin-top: 100px;
+  text-shadow: 3px 3px 0 #000;
+}
+
+@media (max-width: 768px) {
+  .pirate-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.5rem;
+  }
+
+  .progress {
+    font-size: 0.6rem;
+  }
+}
