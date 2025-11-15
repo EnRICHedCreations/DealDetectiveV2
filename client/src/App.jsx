@@ -19,7 +19,8 @@ function App() {
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/properties');
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/properties`);
       const data = await response.json();
       setProperties(data);
       setLoading(false);
@@ -41,7 +42,8 @@ function App() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/submit', {
+      const apiUrl = import.meta.env.VITE_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
