@@ -1,5 +1,4 @@
 // Vercel Serverless Function for getting properties
-const axios = require('axios');
 
 // Sample properties data (in production, this could come from a database)
 const properties = [
@@ -25,28 +24,35 @@ async function geocodeAddress(address) {
   }
 
   try {
-    const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-      params: {
-        address: address,
-        key: GOOGLE_API_KEY
-      }
-    });
+    const https = require('https');
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${GOOGLE_API_KEY}`;
 
-    if (response.data.results && response.data.results.length > 0) {
-      const location = response.data.results[0].geometry.location;
-      return {
-        lat: location.lat,
-        lng: location.lng
-      };
-    }
-    return null;
+    return new Promise((resolve) => {
+      https.get(url, (resp) => {
+        let data = '';
+        resp.on('data', (chunk) => { data += chunk; });
+        resp.on('end', () => {
+          try {
+            const json = JSON.parse(data);
+            if (json.results && json.results.length > 0) {
+              const location = json.results[0].geometry.location;
+              resolve({ lat: location.lat, lng: location.lng });
+            } else {
+              resolve(null);
+            }
+          } catch (e) {
+            resolve(null);
+          }
+        });
+      }).on('error', () => resolve(null));
+    });
   } catch (error) {
     console.error('Geocoding error:', error.message);
     return null;
   }
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -81,4 +87,4 @@ export default async function handler(req, res) {
     console.error('Error fetching properties:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
