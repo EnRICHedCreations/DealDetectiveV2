@@ -7,7 +7,7 @@
 }
 
 .property-address {
-  font-size: 0.8rem;
+  font-size: 1.41rem;
   color: #ffd700;
   text-align: center;
   margin-bottom: 13px;
@@ -47,14 +47,14 @@
 }
 
 .property-info h3 {
-  font-size: 0.54rem;
+  font-size: 0.96rem;
   color: #ffd700;
   margin-bottom: 10px;
   text-shadow: 1px 1px 0 #000;
 }
 
 .info-item {
-  font-size: 0.4rem;
+  font-size: 0.71rem;
   margin-bottom: 8px;
   line-height: 1.6;
   color: #f5deb3;
@@ -86,7 +86,7 @@
 }
 
 .input-section h3 {
-  font-size: 0.6rem;
+  font-size: 1.06rem;
   color: #ffd700;
   text-align: center;
   margin-bottom: 13px;
@@ -143,7 +143,7 @@
 
 .input-group label {
   display: block;
-  font-size: 0.4rem;
+  font-size: 0.71rem;
   color: #ffd700;
   margin-bottom: 5px;
   text-shadow: 1px 1px 0 #000;
@@ -153,7 +153,7 @@
   width: 100%;
   padding: 7px;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.47rem;
+  font-size: 0.84rem;
   background: #1a1a2e;
   color: #ffd700;
   border: 2px solid #8b4513;
@@ -174,7 +174,7 @@
 
 .score-badge {
   margin-top: 5px;
-  font-size: 0.34rem;
+  font-size: 0.6rem;
   color: #ffd700;
   text-align: center;
   padding: 3px;
@@ -186,7 +186,7 @@
   width: 100%;
   padding: 10px;
   font-family: 'Press Start 2P', cursive;
-  font-size: 0.54rem;
+  font-size: 0.96rem;
   background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
   color: #ffd700;
   border: 3px solid #d4a574;
@@ -217,14 +217,14 @@
   }
 
   .property-address {
-    font-size: 0.8rem;
+    font-size: 1.41rem;
   }
 
   .property-info h3 {
-    font-size: 0.6rem;
+    font-size: 1.06rem;
   }
 
   .info-item {
-    font-size: 0.5rem;
+    font-size: 0.89rem;
   }
 }
