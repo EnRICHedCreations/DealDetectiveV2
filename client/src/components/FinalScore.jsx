@@ -1,37 +1,38 @@
+import { useRef } from 'react';
+import html2canvas from 'html2canvas';
+import { jsPDF } from 'jspdf';
 import './FinalScore.css';
 
 function FinalScore({ scores, onRestart }) {
+  const reportRef = useRef(null);
+
   const calculateOverallAverage = () => {
     const sum = scores.reduce((acc, score) => acc + score.averageScore, 0);
     return (sum / scores.length).toFixed(1);
   };
 
-  const downloadReport = () => {
-    const overallAvg = calculateOverallAverage();
-    let reportContent = `Deal Detective V2 - Score Report\n`;
-    reportContent += `${'='.repeat(50)}\n\n`;
-    reportContent += `Overall Average Score: ${overallAvg}/10\n\n`;
-    reportContent += `Property Breakdown:\n`;
-    reportContent += `${'-'.repeat(50)}\n\n`;
+  const downloadReport = async () => {
+    if (!reportRef.current) return;
 
-    scores.forEach((score, index) => {
-      reportContent += `Property ${index + 1}:\n`;
-      reportContent += `  ARV Score: ${score.arv.score}/10 (${score.arv.percentDiff}% off)\n`;
-      reportContent += `  Repairs Score: ${score.repairs.score}/10 (${score.repairs.percentDiff}% off)\n`;
-      reportContent += `  MAO Score: ${score.mao.score}/10 (${score.mao.percentDiff}% off)\n`;
-      reportContent += `  LAO Score: ${score.lao.score}/10 (${score.lao.percentDiff}% off)\n`;
-      reportContent += `  Average: ${score.averageScore.toFixed(1)}/10\n\n`;
-    });
+    try {
+      const canvas = await html2canvas(reportRef.current, {
+        scale: 2,
+        backgroundColor: '#1a1a2e',
+        logging: false,
+      });
 
-    const blob = new Blob([reportContent], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `deal-detective-report-${Date.now()}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'px',
+        format: [canvas.width, canvas.height],
+      });
+
+      pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+      pdf.save(`deal-detective-report-${Date.now()}.pdf`);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
   };
 
   const overallAvg = calculateOverallAverage();
@@ -45,7 +46,7 @@ function FinalScore({ scores, onRestart }) {
 
   return (
     <div className="final-score">
-      <div className="final-score-container">
+      <div className="final-score-container" ref={reportRef}>
         <h1 className="final-title">🏴‍☠️ Final Results 🏴‍☠️</h1>
 
         <div className="overall-score">

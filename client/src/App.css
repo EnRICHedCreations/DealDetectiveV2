@@ -16,41 +16,41 @@ body {
 
 .App {
   width: 100%;
-  max-width: 1400px;
+  max-width: 1260px;
   margin: 0 auto;
-  padding: 13px;
+  padding: 10px;
 }
 
 .pirate-header {
   text-align: center;
-  margin-bottom: 20px;
-  padding: 13px;
+  margin-bottom: 15px;
+  padding: 10px;
   background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
   border: 3px solid #d4a574;
   border-radius: 5px;
-  box-shadow: 0 5px 0 #654321, 0 8px 13px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 0 #654321, 0 6px 10px rgba(0, 0, 0, 0.5);
 }
 
 .pirate-header h1 {
-  font-size: 2.37rem;
+  font-size: 2.1rem;
   color: #ffd700;
   text-shadow: 2px 2px 0 #654321, 3px 3px 0 #000;
-  margin-bottom: 7px;
-  letter-spacing: 1.3px;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
 }
 
 .subtitle {
-  font-size: 0.84rem;
+  font-size: 0.75rem;
   color: #f5deb3;
-  margin-top: 7px;
+  margin-top: 5px;
   text-shadow: 1px 1px 0 #654321;
 }
 
 .progress {
-  font-size: 0.96rem;
+  font-size: 0.85rem;
   color: #ffd700;
-  margin-top: 10px;
-  padding: 7px;
+  margin-top: 8px;
+  padding: 5px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 3px;
   display: inline-block;
@@ -59,7 +59,7 @@ body {
 .game-container {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 10px;
 }
 
 .loading {

@@ -24,25 +24,25 @@ function ScoreCard({ score, onNext, isLastProperty }) {
         <div className="score-item">
           <span className="score-label">ARV:</span>
           <span className={`score-value ${score.arv.color}`}>
-            {score.arv.score}/10 ({score.arv.percentDiff}% off)
+            {score.arv.score}/10
           </span>
         </div>
         <div className="score-item">
           <span className="score-label">Repairs:</span>
           <span className={`score-value ${score.repairs.color}`}>
-            {score.repairs.score}/10 ({score.repairs.percentDiff}% off)
+            {score.repairs.score}/10
           </span>
         </div>
         <div className="score-item">
           <span className="score-label">MAO:</span>
           <span className={`score-value ${score.mao.color}`}>
-            {score.mao.score}/10 ({score.mao.percentDiff}% off)
+            {score.mao.score}/10
           </span>
         </div>
         <div className="score-item">
           <span className="score-label">LAO:</span>
           <span className={`score-value ${score.lao.color}`}>
-            {score.lao.score}/10 ({score.lao.percentDiff}% off)
+            {score.lao.score}/10
           </span>
         </div>
       </div>
