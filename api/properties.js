@@ -35,20 +35,8 @@ function loadPropertiesFromCSV() {
       .filter(Boolean);
   } catch (error) {
     console.error('Error loading CSV:', error);
-    // Fallback to sample data
-    return [
-      {
-        id: 0,
-        address: "274 Kenwood Ave, Delmar, NY, 12054",
-        notes: "No notes",
-        pictures: "https://google.com",
-        contractPrice: 105000,
-        arv: 150000,
-        repairs: 15000,
-        mao: 105000,
-        lao: 73500
-      }
-    ];
+    // Return empty array if CSV can't be loaded
+    return [];
   }
 }
 
