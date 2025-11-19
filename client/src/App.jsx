@@ -7,7 +7,7 @@ import FinalScore from './components/FinalScore';
 function App() {
   const [properties, setProperties] = useState([]);
   const [currentPropertyIndex, setCurrentPropertyIndex] = useState(0);
-  const [answers, setAnswers] = useState({ arv: '', repairs: '', mao: '', lao: '' });
+  const [answers, setAnswers] = useState({ arv: '', repairs: '', mao: '', lao: '', deal: '' });
   const [scores, setScores] = useState([]);
   const [currentScore, setCurrentScore] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ function App() {
 
   const handleSubmit = async () => {
     // Validate inputs
-    if (!answers.arv || !answers.repairs || !answers.mao || !answers.lao) {
+    if (!answers.arv || !answers.repairs || !answers.mao || !answers.lao || !answers.deal) {
       alert('Ahoy! Fill in all fields before submitting, ye scurvy dog!');
       return;
     }
@@ -53,6 +53,7 @@ function App() {
             repairs: parseFloat(answers.repairs),
             mao: parseFloat(answers.mao),
             lao: parseFloat(answers.lao),
+            deal: answers.deal,
           },
         }),
       });
@@ -68,7 +69,7 @@ function App() {
   const handleNextProperty = () => {
     if (currentPropertyIndex < properties.length - 1) {
       setCurrentPropertyIndex(currentPropertyIndex + 1);
-      setAnswers({ arv: '', repairs: '', mao: '', lao: '' });
+      setAnswers({ arv: '', repairs: '', mao: '', lao: '', deal: '' });
       setCurrentScore(null);
     } else {
       setGameComplete(true);
@@ -77,7 +78,7 @@ function App() {
 
   const handleRestart = () => {
     setCurrentPropertyIndex(0);
-    setAnswers({ arv: '', repairs: '', mao: '', lao: '' });
+    setAnswers({ arv: '', repairs: '', mao: '', lao: '', deal: '' });
     setScores([]);
     setCurrentScore(null);
     setGameComplete(false);
@@ -100,7 +101,7 @@ function App() {
   return (
     <div className="App">
       <header className="pirate-header">
-        <h1>⚓ Deal Detective ⚓</h1>
+        <h1>⚓ Comp Quest ⚓</h1>
         <p className="subtitle">Pirate's Guide to Real Estate Treasure</p>
         <div className="progress">
           Property {currentPropertyIndex + 1} of {properties.length}

@@ -31,6 +31,7 @@ const loadProperties = () => {
         repairs: parseFloat(row.Repairs),
         mao: parseFloat(row.MAO),
         lao: parseFloat(row.LAO),
+        deal: row.Deal,
       });
     })
     .on('end', () => {
@@ -121,6 +122,10 @@ app.post('/api/submit', (req, res) => {
     return 0;
   };
 
+  const calculateDealScore = (userDeal, trueDeal) => {
+    return userDeal === trueDeal ? 10 : 0;
+  };
+
   const getColorFromScore = (score) => {
     if (score >= 8) return 'green';
     if (score >= 5) return 'orange';
@@ -131,8 +136,9 @@ app.post('/api/submit', (req, res) => {
   const repairsScore = calculateScore(answers.repairs, property.repairs);
   const maoScore = calculateScore(answers.mao, property.mao);
   const laoScore = calculateScore(answers.lao, property.lao);
+  const dealScore = calculateDealScore(answers.deal, property.deal);
 
-  const averageScore = ((arvScore + repairsScore + maoScore + laoScore) / 4).toFixed(1);
+  const averageScore = ((arvScore + repairsScore + maoScore + laoScore + dealScore) / 5).toFixed(1);
 
   const results = {
     arv: {
@@ -154,6 +160,11 @@ app.post('/api/submit', (req, res) => {
       score: laoScore,
       color: getColorFromScore(laoScore),
       percentDiff: Math.abs((answers.lao - property.lao) / property.lao * 100).toFixed(1)
+    },
+    deal: {
+      score: dealScore,
+      color: getColorFromScore(dealScore),
+      percentDiff: null
     },
     averageScore: parseFloat(averageScore)
   };

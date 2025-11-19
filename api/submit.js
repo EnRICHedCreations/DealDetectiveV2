@@ -22,6 +22,7 @@ try {
     repairs: parseFloat(row.Repairs),
     mao: parseFloat(row.MAO),
     lao: parseFloat(row.LAO),
+    deal: row.Deal,
   }));
 } catch (error) {
   console.error('Error loading CSV:', error);
@@ -35,7 +36,8 @@ try {
       arv: 150000,
       repairs: 15000,
       mao: 105000,
-      lao: 73500
+      lao: 73500,
+      deal: "Good"
     }
   ];
 }
@@ -54,6 +56,10 @@ const calculateScore = (userValue, trueValue) => {
   if (percentDiff <= 75) return 2;
   if (percentDiff <= 100) return 1;
   return 0;
+};
+
+const calculateDealScore = (userDeal, trueDeal) => {
+  return userDeal === trueDeal ? 10 : 0;
 };
 
 const getColorFromScore = (score) => {
@@ -91,8 +97,9 @@ module.exports = async function handler(req, res) {
     const repairsScore = calculateScore(answers.repairs, property.repairs);
     const maoScore = calculateScore(answers.mao, property.mao);
     const laoScore = calculateScore(answers.lao, property.lao);
+    const dealScore = calculateDealScore(answers.deal, property.deal);
 
-    const averageScore = ((arvScore + repairsScore + maoScore + laoScore) / 4).toFixed(1);
+    const averageScore = ((arvScore + repairsScore + maoScore + laoScore + dealScore) / 5).toFixed(1);
 
     const results = {
       arv: {
@@ -114,6 +121,11 @@ module.exports = async function handler(req, res) {
         score: laoScore,
         color: getColorFromScore(laoScore),
         percentDiff: Math.abs((answers.lao - property.lao) / property.lao * 100).toFixed(1)
+      },
+      deal: {
+        score: dealScore,
+        color: getColorFromScore(dealScore),
+        percentDiff: null
       },
       averageScore: parseFloat(averageScore)
     };

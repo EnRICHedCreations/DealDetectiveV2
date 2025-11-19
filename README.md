@@ -1,4 +1,4 @@
-# Deal Detective V2
+# Comp Quest
 
 A pirate-themed 8-bit real estate wholesaling game built with React and Node.js.
 

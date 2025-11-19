@@ -96,7 +96,16 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
         <h3>🏴‍☠️ Make Your Estimates, Matey!</h3>
         <div className="input-grid">
           <div className={`input-group ${getScoreColor('arv')}`}>
-            <label>After Repair Value (ARV)</label>
+            <label>
+              After Repair Value (ARV)
+              <span className="info-icon" title="Amount a property is worth after all repairs, renovations, and improvements have been completed and the home is brought up to its full market value">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <text x="8" y="12" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">i</text>
+                </svg>
+                <span className="tooltip">Amount a property is worth after all repairs, renovations, and improvements have been completed and the home is brought up to its full market value</span>
+              </span>
+            </label>
             <input
               type="number"
               value={answers.arv}
@@ -112,7 +121,16 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
           </div>
 
           <div className={`input-group ${getScoreColor('repairs')}`}>
-            <label>Estimated Repairs</label>
+            <label>
+              Estimated Repairs
+              <span className="info-icon" title="The full cost of repairs necessary to bring the property to its ARV">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <text x="8" y="12" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">i</text>
+                </svg>
+                <span className="tooltip">The full cost of repairs necessary to bring the property to its ARV</span>
+              </span>
+            </label>
             <input
               type="number"
               value={answers.repairs}
@@ -128,7 +146,16 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
           </div>
 
           <div className={`input-group ${getScoreColor('mao')}`}>
-            <label>Max Allowable Offer (MAO)</label>
+            <label>
+              Max Allowable Offer (MAO)
+              <span className="info-icon" title="What an investor will pay for the property">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <text x="8" y="12" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">i</text>
+                </svg>
+                <span className="tooltip">What an investor will pay for the property</span>
+              </span>
+            </label>
             <input
               type="number"
               value={answers.mao}
@@ -144,7 +171,16 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
           </div>
 
           <div className={`input-group ${getScoreColor('lao')}`}>
-            <label>Lowest Allowable Offer (LAO)</label>
+            <label>
+              Lowest Allowable Offer (LAO)
+              <span className="info-icon" title="Your LowballOffer.ai offer">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor">
+                  <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  <text x="8" y="12" fontSize="10" textAnchor="middle" fill="currentColor" fontWeight="bold">i</text>
+                </svg>
+                <span className="tooltip">Your LowballOffer.ai offer</span>
+              </span>
+            </label>
             <input
               type="number"
               value={answers.lao}
@@ -155,6 +191,26 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
             {currentScore && (
               <div className="score-badge">
                 Score: {currentScore.lao.score}/10
+              </div>
+            )}
+          </div>
+
+          <div className={`input-group ${getScoreColor('deal')}`}>
+            <label>Deal Quality</label>
+            <select
+              value={answers.deal || ''}
+              onChange={(e) => onInputChange('deal', e.target.value)}
+              disabled={currentScore !== null}
+              className="deal-select"
+            >
+              <option value="">Select...</option>
+              <option value="Good">Good</option>
+              <option value="Okay">Okay</option>
+              <option value="Bad">Bad</option>
+            </select>
+            {currentScore && (
+              <div className="score-badge">
+                Score: {currentScore.deal.score}/10
               </div>
             )}
           </div>
