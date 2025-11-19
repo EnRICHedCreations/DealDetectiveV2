@@ -1,6 +1,20 @@
+import { useState } from 'react';
 import './PropertyCard.css';
 
 function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore }) {
+  const [viewMode, setViewMode] = useState('map'); // 'map' or 'streetview'
+
+  const getGoogleMapUrl = (property) => {
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    // Using Google Maps Embed API - Map mode with marker
+    if (property.lat && property.lng) {
+      return `https://www.google.com/maps/embed/v1/place?q=${property.lat},${property.lng}&key=${apiKey}&zoom=18&maptype=satellite`;
+    }
+    // Fallback with address
+    const encodedAddress = encodeURIComponent(property.address);
+    return `https://www.google.com/maps/embed/v1/place?q=${encodedAddress}&key=${apiKey}&zoom=18&maptype=satellite`;
+  };
+
   const getGoogleStreetViewUrl = (property) => {
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     // Using Google Maps Embed API - Street View mode with coordinates
@@ -28,16 +42,31 @@ function PropertyCard({ property, answers, onInputChange, onSubmit, currentScore
 
       <div className="property-main">
         <div className="map-section">
-          <div className="street-view">
+          <div className="map-view-toggle">
+            <button
+              className={`toggle-btn ${viewMode === 'map' ? 'active' : ''}`}
+              onClick={() => setViewMode('map')}
+            >
+              🗺️ Map View
+            </button>
+            <button
+              className={`toggle-btn ${viewMode === 'streetview' ? 'active' : ''}`}
+              onClick={() => setViewMode('streetview')}
+            >
+              👁️ Street View
+            </button>
+          </div>
+          <div className="map-container">
             <iframe
-              src={getGoogleStreetViewUrl(property)}
+              key={viewMode} // Force reload on view change
+              src={viewMode === 'map' ? getGoogleMapUrl(property) : getGoogleStreetViewUrl(property)}
               width="100%"
               height="400"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title={`Street view of ${property.address}`}
+              title={viewMode === 'map' ? `Map of ${property.address}` : `Street view of ${property.address}`}
             />
           </div>
         </div>
