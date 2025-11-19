@@ -1,18 +1,44 @@
 // Vercel Serverless Function for submitting answers and calculating scores
+const fs = require('fs');
+const path = require('path');
+const { parse } = require('csv-parse/sync');
 
-// Sample properties data (must match properties.js)
-const properties = [
-  {
-    address: "274 Kenwood Ave, Delmar, NY, 12054",
-    notes: "No notes",
-    pictures: "https://google.com",
-    contractPrice: 105000,
-    arv: 150000,
-    repairs: 15000,
-    mao: 105000,
-    lao: 73500
-  }
-];
+// Read and parse CSV file
+let properties = [];
+try {
+  const csvPath = path.join(process.cwd(), 'server', 'sample_properties.csv');
+  const fileContent = fs.readFileSync(csvPath, 'utf-8');
+  const records = parse(fileContent, {
+    columns: true,
+    skip_empty_lines: true
+  });
+
+  properties = records.map(row => ({
+    address: row.Address,
+    notes: row.Notes,
+    pictures: row.Pictures,
+    contractPrice: parseFloat(row.ContractPrice) || 0,
+    arv: parseFloat(row.ARV),
+    repairs: parseFloat(row.Repairs),
+    mao: parseFloat(row.MAO),
+    lao: parseFloat(row.LAO),
+  }));
+} catch (error) {
+  console.error('Error loading CSV:', error);
+  // Fallback to sample data if CSV fails
+  properties = [
+    {
+      address: "274 Kenwood Ave, Delmar, NY, 12054",
+      notes: "No notes",
+      pictures: "https://google.com",
+      contractPrice: 105000,
+      arv: 150000,
+      repairs: 15000,
+      mao: 105000,
+      lao: 73500
+    }
+  ];
+}
 
 const calculateScore = (userValue, trueValue) => {
   const percentDiff = Math.abs((userValue - trueValue) / trueValue) * 100;
