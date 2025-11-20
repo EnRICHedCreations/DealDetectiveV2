@@ -46,14 +46,57 @@ body {
   text-shadow: 1px 1px 0 #654321;
 }
 
+.progress-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 8px;
+  position: relative;
+}
+
 .progress {
   font-size: 0.85rem;
   color: #ffd700;
-  margin-top: 8px;
   padding: 5px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 3px;
-  display: inline-block;
+}
+
+.nav-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #3a3a5a 0%, #2a2a4a 100%);
+  color: #ffd700;
+  border: 2px solid #8b4513;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 2px 0 #1a1a2a, 0 3px 5px rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 0 #000;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-btn:hover {
+  background: linear-gradient(135deg, #4a4a6a 0%, #3a3a5a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 0 #1a1a2a, 0 5px 8px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #1a1a2a, 0 2px 3px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn svg {
+  display: block;
+}
+
+.nav-spacer {
+  width: 100px;
 }
 
 .game-container {
@@ -81,5 +124,19 @@ body {
 
   .progress {
     font-size: 1.06rem;
+  }
+
+  .progress-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-spacer {
+    display: none;
+  }
+
+  .nav-btn {
+    font-size: 0.8rem;
+    padding: 10px 18px;
   }
 }

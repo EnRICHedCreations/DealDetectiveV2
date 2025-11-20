@@ -66,6 +66,14 @@ function App() {
     }
   };
 
+  const handlePreviousProperty = () => {
+    if (currentPropertyIndex > 0) {
+      setCurrentPropertyIndex(currentPropertyIndex - 1);
+      setAnswers({ arv: '', repairs: '', mao: '', lao: '', deal: '' });
+      setCurrentScore(null);
+    }
+  };
+
   const handleNextProperty = () => {
     if (currentPropertyIndex < properties.length - 1) {
       setCurrentPropertyIndex(currentPropertyIndex + 1);
@@ -103,8 +111,19 @@ function App() {
       <header className="pirate-header">
         <h1>⚓ Comp Quest ⚓</h1>
         <p className="subtitle">Pirate's Guide to Real Estate Treasure</p>
-        <div className="progress">
-          Property {currentPropertyIndex + 1} of {properties.length}
+        <div className="progress-section">
+          {currentPropertyIndex > 0 && (
+            <button className="nav-btn back-btn" onClick={handlePreviousProperty}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M11 1L4 8l7 7V1z"/>
+              </svg>
+              Back
+            </button>
+          )}
+          <div className="progress">
+            Property {currentPropertyIndex + 1} of {properties.length}
+          </div>
+          <div className="nav-spacer"></div>
         </div>
       </header>
 
